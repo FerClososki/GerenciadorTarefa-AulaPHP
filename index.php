@@ -17,7 +17,7 @@
     <div class="container">
         <nav class="navbar navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brnad" href="index.php">Crud PHP</a>
+                <a class="navbar-brand" href="index.php">Crud PHP</a>
             </div>
         </nav>
         <main class="container p-4">
@@ -25,15 +25,14 @@
                 <div class="col-md-4">
                     <!-- Formulario-->
                     <div class="card card-body">
-                        <form action="a" method="POST">
+                        <form action="save.php" method="POST">
                             <div class="form-group">
-                                <input type="text" name="titulo" class="form-control"
+                                <input type="text" name="title" class="form-control"
                                     placeholder="Titulo da tarefa " autofocus>
                             </div>
                             <div class="form-group">
-                                <textarea name="descricao" rows="2" class="form-control"
-                                    placeholder="descrição da tarefa">
-                            </textarea>
+                                <textarea name="description" rows="2" class="form-control"
+                                    placeholder="descrição da tarefa"></textarea>
                             </div>
                             <input type="submit" name="salvar" class="btn btn-success btn-block"
                                 value="Salvar tarefa">
