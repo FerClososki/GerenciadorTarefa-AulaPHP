@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 require_once 'conn.php';
 
@@ -12,10 +17,15 @@ try {
         if ($stmt) {
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
-                header("Location: index.pqp");
+                $_SESSION['message'] = "Tarefa deletada com sucesso!";
+                $_SESSION['message_type'] = "danger";
+                header("Location: index.php");
                 exit();
             } else {
-                throw new Exception("Erro ao executar a exclusão: " . $stmt->error);
+                $_SESSION['message'] = "Erro ao deletar a tarefa.";
+                $_SESSION['message_type'] = "warning";
+                header("Location: index.php");
+                exit();
             }
 
             $stmt->close();
