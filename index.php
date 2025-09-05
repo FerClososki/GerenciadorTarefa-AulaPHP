@@ -43,11 +43,11 @@ if (!isset($_SESSION['user_id'])) {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php 
+        <?php
             unset($_SESSION['message']);
             unset($_SESSION['message_type']);
-            endif
-            ?>
+        endif
+        ?>
         <!--- /SESSION MESSAGE --->
         <main class="container p-4">
             <div class="row">
@@ -130,10 +130,10 @@ if (!isset($_SESSION['user_id'])) {
     <script>
         // Timer para esconder a session message
         setTimeout(() => {
-           const alert = document.querySelector('.alert');
-           if (alert) {
-               alert.style.display = 'none';
-           }
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
         }, 1500);
     </script>
 </body>

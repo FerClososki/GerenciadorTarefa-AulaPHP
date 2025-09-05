@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'conn.php';
 
@@ -7,40 +7,42 @@ try {
         $email = isset($_POST['email']) ? $_POST['email'] : null;
         $password = isset($_POST['password']) ? $_POST['password'] : null;
 
-        if($email && $password) {
+        if ($email && $password) {
             $sql = "SELECT id, email, password FROM users WHERE email = ?";
             $stmt = $conn->prepare($sql);
 
-            if($stmt){
+            if ($stmt) {
                 $stmt->bind_param("s", $email);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                if($result->num_rows == 1) {
+                if ($result->num_rows == 1) {
                     $user = $result->fetch_assoc();
-                    if(password_verify($password, $user['password'])){
+                    if (password_verify($password, $user['password'])) {
                         session_start();
                         $_SESSION['user_id'] = $user['id'];
                         $_SESSION['email'] = $user['email'];
+                        $_SESSION['message'] = "Login realizado com sucesso, " . $user['email'];
+                        $_SESSION['message_type'] = "success";
                         header("Location: index.php");
                         exit();
                     } else {
                         throw new Exception("Email ou senha invalido!");
                     }
                 } else {
-                     throw new Exception("Email ou senha invalido!");
+                    throw new Exception("Email ou senha invalido!");
                 }
                 $stmt->close();
             } else {
                 throw new Exception("Erro ao preparar a consulta: " . $conn->error);
             }
-        }else{
+        } else {
             throw new Exception("Email e senha são obrgatorios: " . $conn->error);
         }
-    }else{
+    } else {
         throw new Exception("Metodo de requisão invalido: " . $conn->error);
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
-}finally{
+} finally {
     $conn->close();
 }
